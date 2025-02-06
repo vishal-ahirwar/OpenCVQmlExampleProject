@@ -5,17 +5,19 @@ project(OpenCVQmlExampleProject VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOMOC ON)
+set(BUILD_SHARED_LIBS OFF)
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 find_package(Qt6 REQUIRED COMPONENTS Quick)
-set(OpenCV_DIR C:/Users/Vishal/Desktop/ADT/external/opencv/build)
+set(OpenCV_DIR ${CMAKE_SOURCE_DIR}/external/opencv/build/install)
 find_package(OpenCV REQUIRED)
 qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appOpenCVQmlExampleProject
-    main.cpp
-    cvimageprovider.h
-    cvimageprovider.cpp
-    res.qrc
-    streamer.h streamer.cpp
+    src/main.cpp
+    src/cvimageprovider.h
+    src/cvimageprovider.cpp
+    qml/res.qrc
+
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

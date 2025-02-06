@@ -8,7 +8,6 @@ ApplicationWindow {
 
     Image {
         id: cameraImage
-        source: "image://cvprovider/image"
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
@@ -18,10 +17,9 @@ ApplicationWindow {
     Connections
     {
         target:stream
-        function onReload()
+        function onImageUpdated(img)
         {
-            cameraImage.source=""
-            cameraImage.source="image://cvprovider/image"
+            cameraImage.source="image://cvprovider/image?"+Math.random()
         }
     }
 
@@ -34,6 +32,7 @@ ApplicationWindow {
         {
             horizontalCenter:parent.horizontalCenter
             bottom:parent.bottom
+            margins:15
         }
         onClicked:{
             Qt.quit()

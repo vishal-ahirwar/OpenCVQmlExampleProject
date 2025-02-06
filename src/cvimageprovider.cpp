@@ -5,20 +5,15 @@
 #include <QDebug>
 
 CvImageProvider::CvImageProvider(QObject*parent) : QQuickImageProvider(QQuickImageProvider::Image), capture(0) {
-    image=QImage(512,512,QImage::Format_RGB888);
-    image.fill(QColor("black"));
     // Open the default camera (index 0)
     if (!capture.isOpened()) {
         qWarning() << "Error: Camera not opened!";
         return;
     }
-    cv::Mat frame;
-    capture>>frame;
-    image= QImage(frame.data,frame.cols,frame.rows,QImage::Format_RGB888).rgbSwapped();
     // Create a timer to update frames regularly
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &CvImageProvider::updateFrame);
-    timer->start(33);  // ~30 FPS (every 33ms)
+    timer->start(60);  // ~30 FPS (every 33ms)
 }
 
 QImage CvImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize) {
