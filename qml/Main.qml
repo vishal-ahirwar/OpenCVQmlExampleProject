@@ -29,6 +29,7 @@ ApplicationWindow {
         blurMax: 64
         blur: 1.0
         opacity:0.6
+        autoPaddingEnabled:false
     }
     Button {
         id: btnClose
