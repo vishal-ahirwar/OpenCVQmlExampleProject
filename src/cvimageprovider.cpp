@@ -31,6 +31,7 @@ QImage CvImageProvider::requestImage(const QString &id, QSize *size, const QSize
 void CvImageProvider::updateFrame() {
     cv::Mat frame;
     capture >> frame;  // Capture a new frame from the camera
+    cv::flip(frame,frame,1);
     if (frame.empty()) {
         qWarning() << "Captured frame is empty!";
         return;
